@@ -31,6 +31,7 @@ export default function Grid({ Memes, scrollRef }) {
             onClick={() => handleImageClick(meme)}
           >
             <img src={meme.url} alt={meme.name} />
+            <div className="meme-name">{meme.name}</div>
           </div>
         ))}
       </div>

@@ -1,8 +1,9 @@
 import "./App.css";
 
 import { useEffect, useState, useCallback, useRef } from "react";
-import Navbar from "./Components/Navbar";
+import Header from "./Components/Header";
 import Grid from "./Components/Grid";
+import Credits from "./Components/Credits";
 
 function App() {
   const [memes, setMemes] = useState([]);
@@ -37,8 +38,9 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar scrollRef={scrollRef} />
+      <Header scrollRef={scrollRef} />
       <Grid Memes={memes} scrollRef={scrollRef} />
+      <Credits />
     </div>
   );
 }

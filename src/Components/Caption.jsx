@@ -6,9 +6,7 @@ const Caption = () => {
   const [caption, setCaption] = useState("Double click to edit caption");
   const [textSize, setTextSize] = useState(25);
   const [color, setColor] = useState("#000");
-
   const styles = { color: color, fontSize: `${textSize}px` };
-
   const changeEditMode = () => {
     setEditMode((prev) => !prev);
   };
@@ -36,6 +34,7 @@ const Caption = () => {
           />
         </div>
       )}
+
       <Draggable>
         <div className="caption" style={styles} onDoubleClick={changeEditMode}>
           {caption}
