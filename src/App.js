@@ -4,12 +4,14 @@ import { useEffect, useState, useCallback, useRef } from "react";
 import Header from "./Components/Header";
 import Grid from "./Components/Grid";
 import Credits from "./Components/Credits";
+import Modal from "./Components/Modal";
 
 function App() {
   const [memes, setMemes] = useState([]);
+  const [modal, setModal] = useState(false);
   const scrollRef = useRef();
 
-  const shuffleGradients = (array) => {
+  const shuffleMemes = (array) => {
     let m = array.length,
       t,
       i;
@@ -22,12 +24,16 @@ function App() {
     return array;
   };
 
+  const handleModal = () => {
+    setModal((prev) => !prev);
+  };
+
   const getMemes = useCallback(async () => {
     let tempMemes = [];
     const response = await fetch("https://api.imgflip.com/get_memes");
     const data = await response.json();
     tempMemes = data.data.memes;
-    const anotherTemp = shuffleGradients(tempMemes);
+    const anotherTemp = shuffleMemes(tempMemes);
     setMemes(anotherTemp);
   }, []);
 
@@ -38,7 +44,8 @@ function App() {
 
   return (
     <div className="App">
-      <Header scrollRef={scrollRef} />
+      {modal && <Modal handleModal={handleModal} />}
+      <Header scrollRef={scrollRef} handleModal={handleModal} />
       <Grid Memes={memes} scrollRef={scrollRef} />
       <Credits />
     </div>

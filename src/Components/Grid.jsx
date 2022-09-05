@@ -1,13 +1,13 @@
-import React from "react";
-import Modal from "./Modal";
+import React, { useState } from "react";
+import EditSection from "./EditSection";
 import { BsFillArrowUpCircleFill } from "react-icons/bs";
 
 export default function Grid({ Memes, scrollRef }) {
-  const [modal, setModal] = React.useState(false);
-  const [meme, setMeme] = React.useState(undefined);
+  const [editSection, setEditSection] = useState(false);
+  const [meme, setMeme] = useState(undefined);
 
   const handleImageClick = (meme) => {
-    setModal(true);
+    setEditSection(true);
     setMeme(meme);
     scroll();
   };
@@ -16,13 +16,9 @@ export default function Grid({ Memes, scrollRef }) {
     scrollRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
-  const handleClose = () => {
-    setModal(false);
-  };
-
   return (
     <div className="meme-area">
-      {modal && <Modal meme={meme} handleClose={handleClose} />}
+      {editSection && <EditSection meme={meme} />}
       <div className="grid-container">
         {Memes.map((meme) => (
           <div

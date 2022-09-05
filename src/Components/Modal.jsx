@@ -1,41 +1,25 @@
-import React, { useState, createRef } from "react";
-import Caption from "./Caption";
+import React from "react";
 import { VscChromeClose } from "react-icons/vsc";
-import { exportComponentAsPNG } from "react-component-export-image";
 
-export default function Modal({ meme, handleClose }) {
-  const [captions, setCaptions] = useState(0);
-  const memeRef = createRef();
-
+const Modal = ({ handleModal }) => {
   return (
-    <div className="modal">
-      <div className="meme-image">
-        <div ref={memeRef} style={{ width: "500px", height: "500px" }}>
-          {Array(captions)
-            .fill(0)
-            .map((e) => (
-              <Caption />
-            ))}
-          <img src={meme.url} alt={meme.name} />
-        </div>
-      </div>
-      <div className="meme-text">
-        <span className="close-icon" onClick={() => handleClose()}>
-          <VscChromeClose color="#FFF" />
+    <div className="modal-backdrop">
+      <div className="modal">
+        <span className="close-icon">
+          <VscChromeClose color="#000" onClick={handleModal} />
         </span>
-        <button
-          className="add-text"
-          onClick={() => setCaptions((prev) => prev + 1)}
-        >
-          Add text
-        </button>
-        <button
-          className="save-meme"
-          onClick={() => exportComponentAsPNG(memeRef)}
-        >
-          Save meme
-        </button>
+        <h2>Instructions</h2>
+        <ol className="instructions">
+          <li>Click on any image from the grid to choose as template</li>
+          <li>Click on the "Add text" button to add text</li>
+          <li>Double click on the text to change text, size and color</li>
+          <li>Double click on the text to hide the text properties</li>
+          <li>Click on the "Add text" to add more text</li>
+          <li>Click on the "Save meme" button to save the meme</li>
+        </ol>
       </div>
     </div>
   );
-}
+};
+
+export default Modal;
